@@ -151,6 +151,7 @@
 	};
 
 	/* zuozhongkai 2019/12/30 */
+	// 第44章
 	alphaled {
 		#address-cells = <1>;
 		#size-cells = <1>;
@@ -163,15 +164,16 @@
 				0X0209C004 0X04>; /* GPIO1_GDIR_BASE */
 	};
 
+	// 第45章、第48章、第50章、第55章
 	gpioled{
 		compatible = "alientek,gpioled";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_gpioled>;
-		/* led-gpios = <&gpio1 3 GPIO_ACTIVE_LOW>; */
+		led-gpios = <&gpio1 3 GPIO_ACTIVE_LOW>;
 		status = "okay";
 	};
 
-	/* zozhongkai beep */
+	// 第46章、第57章
 	beep{
 		compatible = "alientek,beep";
 		pinctrl-names = "default";
@@ -180,20 +182,23 @@
 		status = "okay";
 	};
 
-	/* zozhongkai key */
+	// 第47章纯理论，没有实验
+
+	// 第49章、第52章、第53章
 	key{
 		compatible = "alientek,key";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_key>;
 		key-gpios = <&gpio1 18 GPIO_ACTIVE_LOW>;
 		status = "okay";
+		// 第51章-中断实验在49章按键实验的基础上
 		interrupt-parent = <&gpio1>;
 		interrupts = <18 IRQ_TYPE_EDGE_BOTH>;
 	};
 
+	// 第56章
 	dtsleds {
 		compatible = "gpio-leds";
-
 		led0 {
 			label = "red";
 			pinctrl-names = "default";
@@ -204,22 +209,22 @@
 		};
 	};
 
-	/* zozhongkai gpio_keys */
-	gpio_keys{
-		compatible = "gpio-keys";
-		#address-cells = <1>;
-		#size-cells = <0>;
-		autorepeat;
-
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_key>;
-
-		key0 {
-			label = "GPIO KEY Enter";
-			linux,code = <KEY_ENTER>;
-			gpios = <&gpio1 18 GPIO_ACTIVE_LOW>;
-		};
-	};
+	// 第58章5小节
+	// gpio-keys{
+	// 	compatible = "gpio-keys";
+	// 	#address-cells = <1>;
+	// 	#size-cells = <0>;
+	// 	autorepeat;
+	
+	// 	pinctrl-names = "default";
+	// 	pinctrl-0 = <&pinctrl_key>;
+	
+	// 	key0 {
+	// 		label = "GPIO KEY Enter";
+	// 		linux,code = <KEY_ENTER>;
+	// 		gpios = <&gpio1 18 GPIO_ACTIVE_LOW>;
+	// 	};
+	// };
 
 	/* zozhongkai sii9022A reset*/
 	/*sii902x_reset: sii902x-reset {
@@ -310,8 +315,11 @@
 	pinctrl-0 = <&pinctrl_i2c1>;
 	status = "okay";
 
+	// 第61章
+	// 节点名称@器件/设备地址
 	ap3216c@1e {
 		compatible = "alientek,ap3216c";
+		// 器件/设备地址
 		reg = < 0x1e >;
 	};
 
@@ -521,6 +529,7 @@
 			>;
 		};
 
+		// 第61章
 		pinctrl_i2c1: i2c1grp {
 			fsl,pins = <
 				MX6UL_PAD_UART4_TX_DATA__I2C1_SCL 0x4001b8b0
@@ -950,4 +959,3 @@
 	vref-supply = <&reg_vref_adc>;
 	status = "okay";
 };
-
